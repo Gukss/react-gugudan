@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 const Gugu = () => {
     const [number, setNumber] = useState({
@@ -25,7 +25,10 @@ const Gugu = () => {
             setResult("땡");
             setAnswer("");
         }
+        input.focus();
     };
+
+    let input = React.createRef();
 
     return (
         <div>
@@ -33,8 +36,15 @@ const Gugu = () => {
                 {number.num1} 곱하기 {number.num2}는?
             </div>
             <form onSubmit={onSubmitAnswer}>
-                <input type="number" value={answer} onChange={onChangeAnswer} />
-                <button>제출</button>
+                <input
+                    type="number"
+                    value={answer}
+                    onChange={onChangeAnswer}
+                    ref={(ref) => {
+                        input = ref;
+                    }}
+                />
+                <button type="submit">제출</button>
             </form>
             <div>{result}</div>
         </div>
